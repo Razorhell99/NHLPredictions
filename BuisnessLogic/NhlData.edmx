@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NhlSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GamePlayed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HomeTeamID" Type="int" />
+          <Property Name="HomeGoalieID" Type="int" />
+          <Property Name="HomeScore" Type="int" />
+          <Property Name="AwayTeamID" Type="int" />
+          <Property Name="AwayGoalieID" Type="int" />
+          <Property Name="AwayScore" Type="int" />
+        </EntityType>
+        <EntityType Name="Goalies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoalieFirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GoalieLastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TeamID" Type="int" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__GamePlaye__AwayG__3E52440B">
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goalies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="AwayGoalieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__AwayT__3D5E1FD2">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="AwayTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__HomeG__3C69FB99">
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goalies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="HomeGoalieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__HomeT__3B75D760">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="HomeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Goalies__TeamID__3F466844">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Goalies">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NhlSystemModelStoreContainer">
+          <EntitySet Name="GamePlayed" EntityType="Self.GamePlayed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goalies" EntityType="Self.Goalies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__GamePlaye__AwayG__3E52440B" Association="Self.FK__GamePlaye__AwayG__3E52440B">
+            <End Role="Goalies" EntitySet="Goalies" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__AwayT__3D5E1FD2" Association="Self.FK__GamePlaye__AwayT__3D5E1FD2">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__HomeG__3C69FB99" Association="Self.FK__GamePlaye__HomeG__3C69FB99">
+            <End Role="Goalies" EntitySet="Goalies" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__HomeT__3B75D760" Association="Self.FK__GamePlaye__HomeT__3B75D760">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Goalies__TeamID__3F466844" Association="Self.FK__Goalies__TeamID__3F466844">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Goalies" EntitySet="Goalies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NhlSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GamePlayed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HomeTeamID" Type="Int32" />
+          <Property Name="HomeGoalieID" Type="Int32" />
+          <Property Name="HomeScore" Type="Int32" />
+          <Property Name="AwayTeamID" Type="Int32" />
+          <Property Name="AwayGoalieID" Type="Int32" />
+          <Property Name="AwayScore" Type="Int32" />
+          <NavigationProperty Name="Goalies" Relationship="Self.FK__GamePlaye__AwayG__3E52440B" FromRole="GamePlayed" ToRole="Goalies" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__GamePlaye__AwayT__3D5E1FD2" FromRole="GamePlayed" ToRole="Teams" />
+          <NavigationProperty Name="Goalies1" Relationship="Self.FK__GamePlaye__HomeG__3C69FB99" FromRole="GamePlayed" ToRole="Goalies" />
+          <NavigationProperty Name="Teams1" Relationship="Self.FK__GamePlaye__HomeT__3B75D760" FromRole="GamePlayed" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Goalies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoalieFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GoalieLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" />
+          <NavigationProperty Name="GamePlayed" Relationship="Self.FK__GamePlaye__AwayG__3E52440B" FromRole="Goalies" ToRole="GamePlayed" />
+          <NavigationProperty Name="GamePlayed1" Relationship="Self.FK__GamePlaye__HomeG__3C69FB99" FromRole="Goalies" ToRole="GamePlayed" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK__Goalies__TeamID__3F466844" FromRole="Goalies" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GamePlayed" Relationship="Self.FK__GamePlaye__AwayT__3D5E1FD2" FromRole="Teams" ToRole="GamePlayed" />
+          <NavigationProperty Name="GamePlayed1" Relationship="Self.FK__GamePlaye__HomeT__3B75D760" FromRole="Teams" ToRole="GamePlayed" />
+          <NavigationProperty Name="Goalies" Relationship="Self.FK__Goalies__TeamID__3F466844" FromRole="Teams" ToRole="Goalies" />
+        </EntityType>
+        <Association Name="FK__GamePlaye__AwayG__3E52440B">
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goalies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="AwayGoalieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__AwayT__3D5E1FD2">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="AwayTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__HomeG__3C69FB99">
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goalies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="HomeGoalieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GamePlaye__HomeT__3B75D760">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="GamePlayed" Type="Self.GamePlayed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GamePlayed">
+              <PropertyRef Name="HomeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Goalies__TeamID__3F466844">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="Goalies" Type="Self.Goalies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Goalies">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NhlSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GamePlayed" EntityType="Self.GamePlayed" />
+          <EntitySet Name="Goalies" EntityType="Self.Goalies" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" />
+          <AssociationSet Name="FK__GamePlaye__AwayG__3E52440B" Association="Self.FK__GamePlaye__AwayG__3E52440B">
+            <End Role="Goalies" EntitySet="Goalies" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__AwayT__3D5E1FD2" Association="Self.FK__GamePlaye__AwayT__3D5E1FD2">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__HomeG__3C69FB99" Association="Self.FK__GamePlaye__HomeG__3C69FB99">
+            <End Role="Goalies" EntitySet="Goalies" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GamePlaye__HomeT__3B75D760" Association="Self.FK__GamePlaye__HomeT__3B75D760">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="GamePlayed" EntitySet="GamePlayed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Goalies__TeamID__3F466844" Association="Self.FK__Goalies__TeamID__3F466844">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Goalies" EntitySet="Goalies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NhlSystemModelStoreContainer" CdmEntityContainer="NhlSystemEntities">
+          <EntitySetMapping Name="GamePlayed">
+            <EntityTypeMapping TypeName="NhlSystemModel.GamePlayed">
+              <MappingFragment StoreEntitySet="GamePlayed">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HomeTeamID" ColumnName="HomeTeamID" />
+                <ScalarProperty Name="HomeGoalieID" ColumnName="HomeGoalieID" />
+                <ScalarProperty Name="HomeScore" ColumnName="HomeScore" />
+                <ScalarProperty Name="AwayTeamID" ColumnName="AwayTeamID" />
+                <ScalarProperty Name="AwayGoalieID" ColumnName="AwayGoalieID" />
+                <ScalarProperty Name="AwayScore" ColumnName="AwayScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goalies">
+            <EntityTypeMapping TypeName="NhlSystemModel.Goalies">
+              <MappingFragment StoreEntitySet="Goalies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GoalieFirstName" ColumnName="GoalieFirstName" />
+                <ScalarProperty Name="GoalieLastName" ColumnName="GoalieLastName" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="NhlSystemModel.Teams">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
